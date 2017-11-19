@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Formval Example</title>
+  </head>
+  <body>
+
+    <style media="screen">
+
+    form{
+      margin: 50px auto;
+      width: 300px;
+      background: #47A2F4;
+      padding: 25px;
+      border-radius: 10px;
+      -webkit-font-smoothing: antialiased;
+      font-family: sans-serif;
+    }
+      form .inner{
+        width: 100%;
+      }
+
+    input{
+      display: block;
+      width: 270px;
+      border: 1px white solid;
+      padding: 5px 10px;
+      font-size: 0.8em;
+      color: white;
+
+      appearance: none;
+      background: none;
+      outline: none;
+    }
+    input[type=submit]{
+      width: 100px;
+      cursor: pointer;
+    }
+      input[type=submit]:hover{
+        background: white;
+        color: #47A2F4;
+      }
+
+    h1{
+      margin: 0;
+      text-align: center;
+      font-size: 1em;
+      color: white;
+    }
+
+    .row{
+      margin: 15px 0;
+    }
+
+    .field{
+      margin: 5px 0;
+    }
+      .field label{
+        color: white;
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.8em;
+      }
+
+    </style>
+
+
+    <form id="the-form">
+
+      <h1>Formval Example</h1>
+
+      <div class="inner">
+
+        <div class="row">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" name="firstname">
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <input type="text" name="lastname">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Username</label>
+            <input type="text" name="username">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" name="password">
+          </div>
+          <div class="field">
+            <label>Re-type Pasword</label>
+            <input type="password" name="password-confirm">
+          </div>
+        </div>
+
+        <!-- data-formval="submit" used as submit button -->
+        <input type="submit" data-formval="submit" value="Sign Up!">
+
+      </div>
+    </form>
+
+    <!-- external submit button -->
+    <button type="button" id="submit2">Another Submit Button</button>
+
+    <!-- add js scripts -->
+      <!-- (make sure to add formval.js first!) -->
+      <script type="text/javascript" src="../src/formval.js"></script>
+      <!-- your js -->
+      <script type="text/javascript" src="app.js"></script>
+
+  </body>
+</html>
