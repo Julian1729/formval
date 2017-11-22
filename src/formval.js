@@ -79,6 +79,24 @@
   };
 
   /**
+   * Encode key value pair to be used as query string
+   * @param  object params Parameters object {key:value}
+   * @return string Encoded query string
+   */
+  function encodeParams(params) {
+    var encodedString = '';
+    for (var prop in params) {
+        if (params.hasOwnProperty(prop)) {
+            if (encodedString.length > 0) {
+                encodedString += '&';
+            }
+            encodedString += encodeURI(prop + '=' + params[prop]);
+        }
+    }
+    return encodedString;
+}
+
+  /**
   * sendValues
   *
   * Send values to URL w/ AJAX
@@ -93,17 +111,7 @@
   */
   var sendValues = function(url, method, values, extra, callback){
     var self = this;
-    var formvalObject = {
-      '_f' : values
-    };
-    // combine values with extras if it was passed in
-    if(extra){
-      for (var e in extra) {
-        if (extra.hasOwnProperty(e)) {
-          formvalObject[e] = extra[e];
-        }
-      }
-    }
+
     //console.log(JSON.stringify(formvalObject));
     // init xhttp request
     var xhttp = new XMLHttpRequest();
@@ -114,7 +122,7 @@
     };
     xhttp.open(method, url, true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send('Formval=' + JSON.stringify(formvalObject));
+    xhttp.send('_f=' + encodeURIComponent(JSON.stringify(values)) + '&' + encodeParams(extra));
   }
 
   /*

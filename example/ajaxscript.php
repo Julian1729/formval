@@ -49,7 +49,7 @@ if( $results === false ){
 
 
 // values are now accessible from the Formval object ... extra values to
-addUserToDatabase( $f->firstname,  $f->username, $f->{'password-confirm'}, $f->extraValue ... );
+//addUserToDatabase( $f->firstname,  $f->username, $f->{'password-confirm'}, $f->extraValue ... );
 
 
 ?>

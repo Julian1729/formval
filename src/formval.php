@@ -217,18 +217,20 @@ class Formval{
   * @return boolean False on any failed inputs
   */
   public function validate(){
-    // Grab JSON Data
-      $json = $_POST["Formval"];
-      // decode json
-      $rawData = json_decode($json, true);
-      // get Formval data
-      $formData = $rawData['_f'];
-      // remove formval from rawValues
-      unset($rawData['_f']);
-    // Now move extra values into object (like a passed value)
-      foreach ($rawData as $key => $value) {
-        $this->goodInputs[$key] = $value;
+      // Grab JSON Data
+      if(!$_POST["_f"]):
+        throw new Exception("No Formval data passed in");
+      endif;
+      $json = $_POST["_f"];
+      unset( $_POST["_f"] );
+      //move extra values into object as passed value
+      foreach ($_POST as $key => $value) {
+        $this->$key = $value;
       }
+
+
+      // decode json
+      $formData = json_decode($json, true);
     // Start Validating
       // store failed inputs here
       $failedInputs = array();
