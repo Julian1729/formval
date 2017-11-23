@@ -35,6 +35,9 @@ $f->expecting(array(
   //in its requirements here
   'password-confirm' => array(
     'match' => 'password'
+  ),
+  'tos-agree' => array(
+    'required' => true
   )
 ));
 

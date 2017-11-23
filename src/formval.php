@@ -238,11 +238,15 @@ class Formval{
       foreach ($this->expectedInputs as $inputName => $type):
         // check if input name exists in passed values
         if(!array_key_exists($inputName, $formData)){
-          // does not exist...was it required
-          if( array_key_exists('required', $this->types[$type]) && $this->types[$type]['required'] === true ){
+          // input was not passed in...was it required
+          if(
+            ( is_array($type) && (array_key_exists('required', $type) && $type['required'] == true) )
+          ||
+            ( array_key_exists('required', $this->types[$type]) && $this->types[$type]['required'] === true )
+            ){
             //this input was required...add to failed inputs
             $failedInputs[$inputName] = array('required' => true);
-          }
+            }
           // this input was not received and was not required...skip
           continue;
         }
