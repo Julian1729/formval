@@ -7,7 +7,7 @@
   /**
   * validateFormElement
   *
-  * Checks wheter an HTML Element is a valid form element
+  * Checks whether an HTML Element is a valid form element
   *
   * @param HTMLElement formElement The DOM Element
   * @return boolean True on valid
@@ -34,6 +34,7 @@
     // store values here (name:value)
     var values = {};
     // Handle Text Inputs (Excludes checkbox and radio)
+    // OPTIMIZE: Expand getting and setting of inputs into seperate functions
       var textInputs = form.querySelectorAll('INPUT:not([type="checkbox"]):not([type="radio"]), TEXTAREA');
       for(var i=0;i<textInputs.length;i++){
         var input = textInputs[i];
@@ -206,14 +207,6 @@
   */
   Formval.init = function(form, callback, options, extra){
 
-    // query selector has been passed in
-    if(typeof form === 'string'){
-      form = document.getElementById(form);
-    }
-    if( !validateFormElement.call(this, form) ){
-      throw Error( 'First argument expected to be FORM element.' );
-    }
-
     // if callback and option were passed in, attach to object
     if(typeof callback === 'function'){
       this.callback = callback;
@@ -226,6 +219,15 @@
       this.options = options;
     }else {
       this.options = {};
+    }
+
+    // query selector has been passed in
+    if(typeof form === 'string'){
+      form = document.getElementById(form);
+    }
+    // throw an error if this is not a form element
+    if( (this.options.ignoreElement === FALSE) && !validateFormElement.call(this, form) ){
+      throw Error( 'First argument expected to be FORM element.' );
     }
 
     // disable default form submit
